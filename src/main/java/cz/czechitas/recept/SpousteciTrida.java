@@ -44,12 +44,47 @@ public class SpousteciTrida {
     prasekDoPeciva = new PrasekDoPeciva("prasekDoPeciva");
 
     //---------------------------------------------------------------------
+    //1.Smíchejte vajíčka a cukr
+    while (cervenaMiska.getPocetVajec()<4) { //este mozem osetrit, ked ich bude viac
+      cervenaMiska.nalozSiJedenKus(vajicka);
+    }
+    cervenaMiska.nalozSiCelyObsah(pytlikCukru);
+    cervenaMiska.setDobreZamichane();
+    //2.Přidejte máslo a dobře zamíchejte
+    cervenaMiska.nalozSiCelyObsah(maslo125g);
+    cervenaMiska.setDobreZamichane();
+//    3.Přisypte 250 g mouky (pozor, pytlík mouky má 1 kg)
+//    Budeme potřebovat vynulovanou váhu s prázdnou miskou.
+//    Miska si může vzít trochu mouky, zvážit se, a pokud je to víc než 250 g, zase trochu mouky ubrat.
+//    Pokud méně, znovu přidat. A tak pořád dokola, dokud nebude mít správné množství.
+    kuchynskaVaha.vynulujSeS(zlutaMiska);
 
-    // TODO: Sem napiste recept na bublaninu
-    // Pouzivejte napovidani v editoru.
-    // Vyskakuje samo nebo pomoci Ctrl+Mezernik
+    while (kuchynskaVaha.zjistiHmotnost(zlutaMiska) != 250) {
+      if (kuchynskaVaha.zjistiHmotnost(zlutaMiska)< 250) {
+        zlutaMiska.nalozSiTrochu(pytlikMouky);
+      } else {
+        zlutaMiska.vylozSiTrochu();
+      }
+    }
 
-    cervenaMiska.nalozSiJedenKus(vajicka);
+    cervenaMiska.nalozSiObsahJineMisky(zlutaMiska);
+//  4.Nakonec do těsta přidejte prášek do pečiva
+    cervenaMiska.nalozSiCelyObsah(prasekDoPeciva);
+    cervenaMiska.setDobreZamichane();
+    plech.preberSiObsah(cervenaMiska);
+//  5.Před vložením do trouby posypte kousky ovoce
+    for (int i=0; i<50; i++) {
+      plech.posypSeKusem(ovoce);
+    }
+//  6.Vložte do předehřáté trouby a pečte 25 minut na 180 stupnu
+//
+    trouba.zapniSe(180);
+    trouba.nechejPect(5);
+    trouba.vlozSiDovnitr(plech);
+    trouba.nechejPect(25);
+    trouba.vypniSe();
+    trouba.vyndejObsahVen();
+
   }
 
 }
